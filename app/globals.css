@@ -1,0 +1,271 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Architect Heritage — warm cream palette */
+    --background: 30 18% 95%;
+    --foreground: 30 15% 20%;
+    --card: 30 15% 97%;
+    --card-foreground: 30 15% 20%;
+    --popover: 30 18% 95%;
+    --popover-foreground: 30 15% 20%;
+    --primary: 26 35% 35%;
+    --primary-foreground: 30 18% 95%;
+    --secondary: 30 12% 92%;
+    --secondary-foreground: 30 15% 20%;
+    --muted: 30 12% 92%;
+    --muted-foreground: 30 12% 50%;
+    --accent: 30 18% 88%;
+    --accent-foreground: 30 15% 20%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 26 15% 82%;
+    --input: 30 12% 92%;
+    --ring: 26 35% 35%;
+    --radius: 0.875rem;
+
+    /* Glass layer values */
+    --glass-bg: rgba(255, 255, 255, 0.62);
+    --glass-border: rgba(255, 255, 255, 0.80);
+    --glass-shadow: 0 4px 32px rgba(120, 90, 50, 0.08), 0 1px 4px rgba(120, 90, 50, 0.05);
+    --glass-shadow-lg: 0 8px 48px rgba(120, 90, 50, 0.12), 0 2px 8px rgba(120, 90, 50, 0.06);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border box-border;
+  }
+
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    /* Warm multi-tone gradient background — makes glass pop */
+    background-color: hsl(30 18% 93%);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, hsl(35 40% 92%) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 80%, hsl(25 30% 90%) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 50%, hsl(30 20% 95%) 0%, transparent 70%);
+    background-attachment: fixed;
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  /* ─── Typography ─────────────────────────────── */
+  .type-headline {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .type-subheadline {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .type-eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .type-caption {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  /* ─── Glass card — primary surface ──────────── */
+  .card-base {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Elevated glass — for hero sections */
+  .card-glass-lg {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px) saturate(1.5);
+    -webkit-backdrop-filter: blur(24px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow-lg);
+  }
+
+  /* Inset / secondary surface */
+  .card-inset {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  /* ─── Score ring ─────────────────────────────── */
+  .score-ring {
+    stroke-dasharray: 502.4;
+    stroke-dashoffset: 502.4;
+    transition: stroke-dashoffset 1.5s ease-in-out;
+  }
+
+  /* ─── Misc helpers ───────────────────────────── */
+  .text-gold { color: hsl(var(--primary)); }
+  .bg-gold   { background-color: hsl(var(--primary)); }
+
+  /* Subtle inner glow on hover for interactive cards */
+  .card-interactive {
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .card-interactive:hover {
+    box-shadow: 0 8px 40px rgba(120, 90, 50, 0.12), 0 2px 8px rgba(120, 90, 50, 0.07);
+    border-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+  }
+
+  /* Live thought stream animations */
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.32s ease-out;
+  }
+
+  @keyframes cursor-blink {
+    0%, 45% { opacity: 1; }
+    46%, 100% { opacity: 0; }
+  }
+
+  .typing-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    width: 2px;
+    color: hsl(var(--primary));
+    font-weight: 700;
+    font-size: 1.1em;
+    animation: cursor-blink 0.7s steps(1, end) infinite;
+  }
+
+  /* Staged reveal animations for Phase 02 */
+  @keyframes slide-down-in {
+    0%   { opacity: 0; transform: translateY(-20px); max-height: 0; }
+    100% { opacity: 1; transform: translateY(0);     max-height: 600px; }
+  }
+
+  @keyframes fade-in {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate-slide-down-in {
+    animation: slide-down-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    overflow: hidden;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+
+  /* Scoring loader ring */
+  @keyframes scoring-spin {
+    0%   { stroke-dashoffset: 220; }
+    50%  { stroke-dashoffset: 30; }
+    100% { stroke-dashoffset: 220; }
+  }
+
+  @keyframes scoring-rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  .scoring-ring {
+    animation: scoring-rotate 2.2s linear infinite;
+    transform-origin: center;
+  }
+
+  .scoring-ring-arc {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: scoring-spin 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scoring-pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.25; }
+    50%       { transform: scale(1.18); opacity: 0.06; }
+  }
+
+  .scoring-pulse {
+    animation: scoring-pulse-ring 2.2s ease-in-out infinite;
+  }
+
+  .scoring-pulse-2 {
+    animation: scoring-pulse-ring 2.2s ease-in-out infinite;
+    animation-delay: 0.4s;
+  }
+
+  /* Shimmer bar */
+  @keyframes shimmer-slide {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  .shimmer-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+    animation: shimmer-slide 1.6s ease-in-out infinite;
+  }
+
+  /* Dot sweep for the 6-pillar indicators */
+  @keyframes dot-sweep {
+    0%, 100% { opacity: 0.2; transform: scale(0.7); }
+    50%       { opacity: 1;   transform: scale(1); }
+  }
+}
