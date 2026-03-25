@@ -427,7 +427,7 @@ export default function SurveyPage() {
                       <div className="shrink-0 mt-1 w-5 flex justify-center">
                         {step.status === 'error' ? (
                           <XCircle className="w-4 h-4 text-red-500" strokeWidth={2} />
-                        ) : isTyping && step.status !== 'error' ? (
+                        ) : isTyping ? (
                           <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse mt-0.5" />
                         ) : (
                           <CheckCircle2 className="w-4 h-4 text-emerald-500" strokeWidth={2} />
